@@ -10,9 +10,9 @@ service z_ipt_flush /system/bin/z_iptables flush
     oneshot
     disabled
 
-on property:persist.privacy.iptab_blk=1
+on property:sys.boot_completed=1 && property:persist.privacy.iptab_blk=1
     start z_ipt_set
 
-on property:persist.privacy.iptab_blk=0
+on property:sys.boot_completed=1 && property:persist.privacy.iptab_blk=0
     start z_ipt_flush
 
