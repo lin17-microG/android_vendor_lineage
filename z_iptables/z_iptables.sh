@@ -24,6 +24,7 @@ org.bromite.bromite
 org.freeandroidtools.safetynettest
 org.microg.gms.droidguard
 org.schabi.newpipe
+org.thoughtcrime.securesms
 EOF
 }
 
