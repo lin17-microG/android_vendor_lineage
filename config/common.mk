@@ -48,6 +48,12 @@ PRODUCT_OTA_PUBLIC_KEYS := user-keys/releasekey
 #PRODUCT_EXTRA_RECOVERY_KEYS := user-keys/releasekey
 endif
 
+# Updater URI and changelog
+PRODUCT_PROPERTY_OVERRIDES += \
+    lineage.updater.uri=https://raw.githubusercontent.com/lin17-microG/OTA/lin-17.1-microG/$(LINEAGE_BUILD).json
+DEVICE_PACKAGE_OVERLAYS += \
+    vendor/lineage/overlay/changelog/$(LINEAGE_BUILD)
+
 PRODUCT_BRAND ?= LineageOS
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
