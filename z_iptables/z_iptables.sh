@@ -20,6 +20,7 @@ com.firstrowria.pushnotificationtester
 com.google.android.gms
 com.netflix.mediaclient
 com.vonglasow.michael.satstat
+eu.faircode.email
 org.bromite.bromite
 org.freeandroidtools.safetynettest
 org.microg.gms.droidguard
