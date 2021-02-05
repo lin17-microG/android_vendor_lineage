@@ -49,7 +49,7 @@ PRODUCT_OTA_PUBLIC_KEYS := user-keys/releasekey
 endif
 
 # Updater URI and changelog
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     lineage.updater.uri=https://raw.githubusercontent.com/lin17-microG/OTA/lin-17.1-microG/$(LINEAGE_BUILD).json
 DEVICE_PACKAGE_OVERLAYS += \
     vendor/lineage/overlay/changelog/$(LINEAGE_BUILD)
