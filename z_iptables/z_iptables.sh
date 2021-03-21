@@ -16,8 +16,6 @@ cat <<EOF
 com.android.captiveportallogin
 com.android.providers.downloads
 com.aurora.store
-com.aurora.store4
-com.aurora.store.beta
 com.aurora.store.nightly
 com.firstrowria.pushnotificationtester
 com.google.android.gms
