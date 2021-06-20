@@ -9,6 +9,16 @@ IPTABLES=/system/bin/iptables
 IP6TABLES=/system/bin/ip6tables
 
 ##
+## List of apps allowed to still connect to Facebook and Google
+##
+list_fbg_apps() {
+cat <<EOF
+awais.instagrabber
+it.rignanese.leo.slimfacebook
+EOF
+}
+
+##
 ## List of allowed apps to still connect to Google
 ##
 list_apps() {
@@ -57,6 +67,15 @@ $IP6TABLES -F 'oem_out'
 do_block() {
 # X-mode
 $IPTABLES -A 'oem_out' -d 184.168.131.241 -j REJECT --reject-with icmp-port-unreachable
+# Reject outgoing IPv4 traffic to Palantir
+$IPTABLES -A 'oem_out' -d 8.4.231.0/24 -j REJECT --reject-with icmp-port-unreachable
+$IPTABLES -A 'oem_out' -d 62.67.195.0/24 -j REJECT --reject-with icmp-port-unreachable
+$IPTABLES -A 'oem_out' -d 198.97.14.0/23 -j REJECT --reject-with icmp-port-unreachable
+
+# Shoot Facebook/Google exceptions (app list)
+list_fbg_apps | while read APP; do
+  jump_app "$APP"
+done
 # Reject outgoing IPv6 traffic to Facebook (w/o exception)
 $IP6TABLES -A 'oem_out' -d 2620:0:1c00::/40 -j REJECT --reject-with icmp6-port-unreachable
 $IP6TABLES -A 'oem_out' -d 2a03:2880::/31 -j REJECT --reject-with icmp6-port-unreachable
@@ -78,10 +97,6 @@ $IPTABLES -A 'oem_out' -d 179.60.192.0/22 -j REJECT --reject-with icmp-port-unre
 $IPTABLES -A 'oem_out' -d 185.60.216.0/22 -j REJECT --reject-with icmp-port-unreachable
 $IPTABLES -A 'oem_out' -d 185.89.218.0/23 -j REJECT --reject-with icmp-port-unreachable
 $IPTABLES -A 'oem_out' -d 204.15.20.0/22 -j REJECT --reject-with icmp-port-unreachable
-# Reject outgoing IPv4 traffic to Palantir
-$IPTABLES -A 'oem_out' -d 8.4.231.0/24 -j REJECT --reject-with icmp-port-unreachable
-$IPTABLES -A 'oem_out' -d 62.67.195.0/24 -j REJECT --reject-with icmp-port-unreachable
-$IPTABLES -A 'oem_out' -d 198.97.14.0/23 -j REJECT --reject-with icmp-port-unreachable
 
 # Shoot Google exceptions (app list)
 list_apps | while read APP; do
